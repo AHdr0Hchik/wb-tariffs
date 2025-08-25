@@ -10,9 +10,7 @@ function normalizePrivateKey(pk: string) {
 }
 
 export async function getSheetsClient() {
-  if (!env.GOOGLE_SHEETS_ENABLED) {
-    throw new Error("Google Sheets disabled by env");
-  }
+  
 
   if (env.GOOGLE_APPLICATION_CREDENTIALS) {
     const auth = new google.auth.GoogleAuth({

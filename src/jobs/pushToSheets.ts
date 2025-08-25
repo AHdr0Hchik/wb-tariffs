@@ -1,15 +1,12 @@
-import { env, sheetsIds } from "../config/env.js";
-import { logger } from "../utils/logger.js";
-import { getItemsForDaySorted } from "../repositories/tariffsRepo.js";
-import { getSheetsClient, ensureSheetExists, writeTable } from "../google/sheets.js";
+import { env, sheetsIds } from "#/config/env.js";
+import { logger } from "#/utils/logger.js";
+import { getItemsForDaySorted } from "#/repositories/tariffsRepo.js";
+import { getSheetsClient, ensureSheetExists, writeTable } from "#/google/sheets.js";
 
 const SHEET = "stocks_coefs";
 
 export async function pushTariffsToSheets(day: string) {
-  if (!env.GOOGLE_SHEETS_ENABLED) {
-    logger.info("Sheets update skipped: disabled by env");
-    return;
-  }
+  
   if (!sheetsIds.length) {
     logger.info("Sheets update skipped: no GOOGLE_SHEETS_IDS");
     return;
@@ -23,16 +20,17 @@ export async function pushTariffsToSheets(day: string) {
     return;
   }
 
-  const items = await getItemsForDaySorted(day);
-  const headers = ["day", "warehouse_id", "warehouse_name", "box_type", "delivery_type", "region_from", "region_to", "coef"];
-  const rows = items.map((r) => [
-    r.day.toISOString().slice(0, 10),
-    r.warehouse_id ?? "",
+  const all = await getItemsForDaySorted(day);
+  // В лист stocks_coefs выводим коэффициенты хранения
+  const items = all.filter((r: any) => r.delivery_type === "storage");
+
+  const headers = ["day", "warehouse_name", "box_type", "delivery_type", "region", "coef"];
+  const rows = items.map((r: any) => [
+    typeof r.day === "string" ? r.day : new Date(r.day).toISOString().slice(0, 10),
     r.warehouse_name ?? "",
     r.box_type ?? "",
     r.delivery_type ?? "",
-    r.region_from ?? "",
-    r.region_to ?? "",
+    r.region ?? "",
     Number(r.coef),
   ]);
 

@@ -1,4 +1,4 @@
-import { env } from "../config/env.js";
+import { env } from "#/config/env.js";
 
 export async function fetchJsonWithRetry<T>(
   url: string,
@@ -11,11 +11,16 @@ export async function fetchJsonWithRetry<T>(
     const ac = new AbortController();
     const timer = setTimeout(() => ac.abort(), timeoutMs);
     try {
-      // @ts-ignore node18 fetch
+      // @ts-ignore Node 20: global fetch
       const res = await fetch(url, { ...opts, signal: ac.signal });
       clearTimeout(timer);
       if (!res.ok) {
-        lastError = new Error(`HTTP ${res.status} ${res.statusText}`);
+        let text = "";
+        try {
+          text = await res.text();
+        } catch {}
+        const snippet = text ? ` | ${text.slice(0, 800)}` : "";
+        lastError = new Error(`HTTP ${res.status} ${res.statusText}${snippet}`);
       } else {
         return (await res.json()) as T;
       }

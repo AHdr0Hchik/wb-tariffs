@@ -9,14 +9,19 @@ const envSchema = z.object({
   DB_HOST: z.string().default("localhost"),
   DB_PORT: z.coerce.number().default(5432),
   DB_USER: z.string().default("postgres"),
-  DB_PASSWORD: z.string().default("password"),
-  DB_NAME: z.string().default("wb-test"),
+  DB_PASSWORD: z.string().default("postgres"),
+  DB_NAME: z.string().default("postgres"),
 
   WB_TARIFFS_BOX_ENDPOINT: z.string().url().default("https://common-api.wildberries.ru/api/v1/tariffs/box"),
   WB_API_TOKEN: z.string().optional(),
   WB_AUTH_HEADER_NAME: z.string().default("Authorization"),
   WB_FETCH_INTERVAL_MS: z.coerce.number().default(60 * 60 * 1000),
   WB_REQUEST_TIMEOUT_MS: z.coerce.number().default(15000),
+  WB_TARIFFS_BOX_QUERY: z.string().optional(),
+  WB_TARIFFS_BOX_DATE: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/)
+    .optional(),
   
 
   GOOGLE_SHEETS_ENABLED: z
