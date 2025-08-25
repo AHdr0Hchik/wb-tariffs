@@ -11,7 +11,7 @@ cp .env.example .env
 - По умолчанию DB: postgres/postgres/postgres (по условию)
 - Для prod обновления добавьте:
   - WB_API_TOKEN
-  - GOOGLE_SHEETS_IDS=... (через запятую)
+  - GOOGLE_SHEETS_IDS
   - Креды сервисного аккаунта: либо GOOGLE_APPLICATION_CREDENTIALS (путь к файлу), либо GOOGLE_SERVICE_ACCOUNT_JSON (сырой JSON)
 - В Google Sheets дайте доступ сервисному аккаунту (email из JSON) — Editor.
 
@@ -23,8 +23,6 @@ docker compose up --build
 - применит миграции,
 - сразу выполнит первый цикл,
 - затем повторяет раз в час.
-
-Если WB_API_TOKEN не задан — включится демо: загрузит фикстуру и покажет, как всё работает (Google Sheets при этом можно выключить `GOOGLE_SHEETS_ENABLED=false`).
 
 ## Проверка
 
@@ -47,3 +45,4 @@ from wb_box_tariffs_daily_items
 where day = (select max(day) from wb_box_tariffs_daily_items)
 order by coef asc
 limit 10;
+```
