@@ -19,7 +19,7 @@
    - WB_API_TOKEN=<ваш токен>  (можно без Bearer — добавится автоматически)
 4) Для Google Sheets настройте сервисный аккаунт и доступ, укажите IDs таблиц:
    - GOOGLE_SHEETS_IDS=список ID таблиц через запятую (например: 1Abc...,1Xyz...)
-   - Креды сервисного аккаунта (один из вариантов):
+   - Креды сервисного аккаунта:
    -GOOGLE_APPLICATION_CREDENTIALS=/путь/к/google-service-account.json
 5) Запустите:
    - docker compose up --build
