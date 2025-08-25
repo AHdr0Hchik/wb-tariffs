@@ -19,6 +19,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    env_file:
+      - .env
     environment:
       TZ: ${TZ:-UTC}
       DB_HOST: db
@@ -27,7 +29,7 @@ services:
       DB_PASSWORD: postgres
       DB_NAME: postgres
     volumes:
-      - ./secrets/google-service-account.json:/secrets/google-service-account.json:ro
+      - ./secrets/google-service-account.json:/app/secrets/google-service-account.json:ro
     restart: unless-stopped
 
 volumes:

@@ -1,4 +1,4 @@
-import { sha1, stableStringify } from "#/utils/hash.js";
+import { sha1, stableStringify } from "../utils/hash.js";
 
 export interface TariffRow {
   warehouseName?: string | null;

@@ -1,6 +1,6 @@
-import { knex } from "#/db/knex.js";
-import { sha1, stableStringify } from "#/utils/hash.js";
-import type { TariffRow } from "#/domain/wbBox.js";
+import { knex } from "../db/knex.js";
+import { sha1, stableStringify } from "../utils/hash.js";
+import type { TariffRow } from "../domain/wbBox.js";
 
 export async function withAdvisoryLock<T>(lockKey: number, fn: () => Promise<T>): Promise<T | null> {
   const res = await knex.raw<{ rows: { locked: boolean }[] }>(

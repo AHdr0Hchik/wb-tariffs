@@ -1,8 +1,8 @@
-import { env } from "#/config/env.js";
-import { logger } from "#/utils/logger.js";
-import { fetchJsonWithRetry } from "#/utils/http.js";
-import { parseWbBoxTariffs, buildFingerprint } from "#/domain/wbBox.js";
-import { upsertDailyItems, upsertDailySnapshot, withAdvisoryLock } from "#/repositories/tariffsRepo.js";
+import { env } from "../config/env.js";
+import { logger } from "../utils/logger.js";
+import { fetchJsonWithRetry } from "../utils/http.js";
+import { parseWbBoxTariffs, buildFingerprint } from "../domain/wbBox.js";
+import { upsertDailyItems, upsertDailySnapshot, withAdvisoryLock } from "../repositories/tariffsRepo.js";
 
 type AnyObj = Record<string, any>;
 
@@ -49,6 +49,7 @@ async function fetchWB(): Promise<any | null> {
   };
 
   const url = buildUrl();
+  
   return await fetchJsonWithRetry<AnyObj>(url, { method: "GET", headers });
 }
 

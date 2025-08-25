@@ -1,7 +1,7 @@
-import { env, sheetsIds } from "#/config/env.js";
-import { logger } from "#/utils/logger.js";
-import { getItemsForDaySorted } from "#/repositories/tariffsRepo.js";
-import { getSheetsClient, ensureSheetExists, writeTable } from "#/google/sheets.js";
+import { env, sheetsIds } from "../config/env.js";
+import { logger } from "../utils/logger.js";
+import { getItemsForDaySorted } from "../repositories/tariffsRepo.js";
+import { getSheetsClient, ensureSheetExists, writeTable } from "../google/sheets.js";
 
 const SHEET = "stocks_coefs";
 
