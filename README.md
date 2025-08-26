@@ -200,40 +200,6 @@ limit 10;
 
 Если вы хотите подключиться с хоста (DBeaver и т.п.), добавьте в docker-compose.yml для db секцию ports: ["5432:5432"] и перезапустите.
 
-## Структура репозитория
-
-wb-box-tariffs/
-├─ docker-compose.yml
-├─ Dockerfile
-├─ .env.example
-├─ README.md
-├─ package.json
-├─ tsconfig.json
-├─ .gitignore
-├─ .dockerignore
-└─ src/
-   ├─ app.ts
-   ├─ config/
-   │  └─ env.ts
-   ├─ utils/
-   │  ├─ logger.ts
-   │  ├─ http.ts
-   │  └─ hash.ts
-   ├─ db/
-   │  ├─ knex.ts
-   │  └─ migrations/
-   │     ├─ 202508250001_init.(ts|js)
-   │     └─ ... (доп. миграции при изменении схемы)
-   ├─ repositories/
-   │  └─ tariffsRepo.ts
-   ├─ domain/
-   │  └─ wbBox.ts
-   ├─ jobs/
-   │  ├─ fetchWbBoxTariffs.ts
-   │  └─ pushToSheets.ts
-   └─ google/
-      └─ sheets.ts
-
 ## Локальная разработка (опционально)
 
 - Не через Docker:
